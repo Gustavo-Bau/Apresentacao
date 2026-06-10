@@ -476,8 +476,11 @@
     }
     .viewer.open{display:flex}
     .viewer-shell{
-      width:min(1320px, 100%);
-      height:min(840px, 100%);
+      width:min(1320px, calc(100vw - 48px));
+      height:min(840px, calc(100vh - 48px));
+      max-width:calc(100vw - 48px);
+      max-height:calc(100vh - 48px);
+      margin:auto;
       border-radius:28px;
       overflow:hidden;
       background:linear-gradient(180deg, var(--surface), var(--surface-strong));
@@ -501,15 +504,27 @@
       position:relative;
       min-height:0;
       background:var(--bg);
-      display:flex; align-items:center; justify-content:center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       overflow:hidden;
+      padding:12px;
     }
-    .viewer-body img,.viewer-body video,.viewer-body iframe{
-      width:100%; height:100%; object-fit:contain;
+    .viewer-body img,.viewer-body video{
+      width:auto;
+      height:auto;
+      max-width:100%;
+      max-height:100%;
+      object-fit:contain;
+      object-position:center center;
+      margin:auto;
       background:var(--bg);
     }
     .viewer-body iframe{
-      border:0; background:var(--bg);
+      width:100%;
+      height:100%;
+      border:0;
+      background:var(--bg);
     }
     .viewer-controls{
       display:flex; justify-content:space-between; align-items:center;
@@ -615,28 +630,43 @@
       line-height:1.48;
       padding:18px 20px;
     }
-    #panel-4 .panel-body{
-      padding:22px 22px 24px;
+    #panel-3 .cards.field-order{
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      grid-auto-rows:minmax(122px, auto);
+      align-items:stretch;
+      height:100%;
     }
-    #panel-4 .cards.two{
+    #panel-3 .cards.field-order .card{
+      min-height:122px;
+    }
+    #panel-3 .cards.field-order .card.no-click{
+      cursor:default;
+    }
+    #panel-3 .cards.field-order .card.no-click:hover{
+      transform:none;
+    }
+    #panel-4 .panel-body{
+      padding:18px 22px 24px;
+    }
+    #panel-4 .cards.trello-images{
       grid-template-columns:repeat(2,minmax(0,1fr));
       align-items:stretch;
       height:100%;
     }
-    #panel-4 .card.no-click.image-slot{
-      min-height:560px;
+    #panel-4 .image-card{
+      min-height:100%;
+      padding:12px;
       display:flex;
-      align-items:center;
-      justify-content:center;
-      border:1px dashed rgba(0,242,254,.22);
-      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
+      border:1px solid rgba(0,242,254,.22);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      box-shadow:0 18px 45px rgba(0,0,0,.24);
     }
-    #panel-4 .card.no-click.image-slot .slot-label{
-      font-size:24px;
-      font-weight:700;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:var(--muted);
+    #panel-4 .image-card img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      border-radius:16px;
+      background:#fff;
     }
     #panel-5 .overlay-grid{
       grid-template-columns:1fr;
@@ -670,15 +700,20 @@
       height:calc(100% - 76px);
     }
     #panel-7 .panel-image-body{
-      display:block;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       position:relative;
       overflow:hidden;
+      padding:30px;
+      background:var(--bg);
     }
     #panel-7 .panel-full-image{
       width:100%;
       height:100%;
-      object-fit:cover;
+      object-fit:contain;
       display:block;
+      border-radius:18px;
     }
     html[data-theme="light"] .timeline-item{
       border-color:var(--border);
@@ -915,10 +950,6 @@
                 <div class="timeline-date">30 e 31/08/2026</div>
                 <div class="timeline-text">Retirada centrífuga.</div>
               </div>
-              <div class="timeline-item">
-                <div class="timeline-date">Sem envio</div>
-                <div class="timeline-text">Retirada da expander: não será enviada.</div>
-              </div>
             </div>
           </div>
         </section>
@@ -936,7 +967,7 @@
             <div class="panel-step">Painel 3 • Campo</div>
           </div>
           <div class="panel-body">
-            <div class="cards three">
+            <div class="cards field-order">
               <div class="card media" data-viewer='{"type":"gallery","title":"Levantamento dos equipamentos e peças campo","items":["https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/folhacamposervico1.pdf","https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/cadernocampoembranco.jpeg"]}'>
                 <div class="tag blue">Levantamento</div>
                 <h3>Levantamento dos equipamentos e peças campo</h3>
@@ -944,68 +975,60 @@
                 <p>Repassado para a vistoria in loco separado por setores.</p>
               </div>
 
-              <div class="card media" data-viewer='{"type":"gallery","title":"Verificação de serviços in loco","items":["https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/cadernocampo1.jpeg","https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/cadernocampo2.jpeg","https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/cadernocampo3.jpeg","https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/cadernocampo4.jpeg"]}'>
-                <div class="tag blue">In loco</div>
-                <h3>Verificação de serviços in loco</h3>
-                <p>Realizado preenchimento do formulario de serviços e peças.</p>
-                <p>Repassado ao PCM para lançamento em planilhas <strong>EXCEL</strong>.</p>
-                <p class="small">Abrir planilha serviços</p>
-              </div>
-
               <div class="card media" data-viewer='{"type":"image","title":"Troca de equipamentos","src":"https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/trellotrocaequipamentos.jpg"}'>
-                <div class="tag orange">Ampliação</div>
+                <div class="tag blue">Ampliação</div>
                 <h3>Definição de equipamentos que serão trocados na planta</h3>
                 <p>Ampliação dos gargalos para <strong>2000 Ton/Dia</strong>.</p>
               </div>
 
-              <div class="card">
+              <div class="card no-click">
                 <div class="tag green">Rotina</div>
                 <h3>Reuniões semanais</h3>
                 <p>Quintas-Feiras - 9:00Hrs.</p>
                 <p>Em conjunto com supervisor operacional, produção, administrativo e equipe de gestores da manutenção.</p>
-                <p class="small">Abrir Trello</p>
-<p style="margin-top:8px;">
-<a href="https://trello.com/b/9K4CNUML/acompanhamento-manutencao-geral-2026" target="_blank" rel="noopener"
-style="display:inline-block;padding:6px 12px;border-radius:6px;text-decoration:none;font-size:12px;font-weight:600;border:1px solid currentColor;">
-Abrir Trello
-</a>
-</p>
+                <p style="margin-top:8px;">
+                  <a href="https://trello.com/b/9K4CNUML/acompanhamento-manutencao-geral-2026" target="_blank" rel="noopener"
+                    style="display:inline-block;padding:6px 12px;border-radius:6px;text-decoration:none;font-size:12px;font-weight:600;border:1px solid currentColor;">
+                    Abrir Trello
+                  </a>
+                </p>
               </div>
 
-              <div class="card">
+              <div class="card no-click">
                 <div class="tag yellow">Críticos</div>
                 <h3>Avaliações de equipamentos críticos</h3>
                 <p>Consolidar inspeções, apontamentos e fotos de suporte das áreas mais sensíveis da manutenção.</p>
               </div>
 
-              <div class="card">
-                <div class="tag blue">Processos</div>
-                <h3>Evolução dos processos</h3>
-                <p class="small">Abrir planilha de andamento</p>
+              <div class="card media" data-viewer='{"type":"gallery","title":"Verificação de serviços in loco","items":["https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/cadernocampo1.jpeg","https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/cadernocampo2.jpeg","https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/cadernocampo3.jpeg","https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/cadernocampo4.jpeg"]}'>
+                <div class="tag blue">In loco</div>
+                <h3>Verificação de serviços in loco</h3>
+                <p>Realizado preenchimento do formulario de serviços e peças.</p>
+                <p>Repassado ao PCM para lançamento em planilhas <strong>EXCEL</strong>.</p>
               </div>
             </div>
           </div>
         </section>
 
-<!-- PANEL 4 -->
+        <!-- PANEL 4 -->
         <section class="panel" data-step="4" id="panel-4">
           <div class="panel-head">
             <div class="panel-kicker">
               <div class="badge">04</div>
               <div class="head-copy">
                 <h2>Trello</h2>
-                <p>Quadros de acompanhamento.</p>
+                <p>Quadros de acompanhamento exibidos diretamente no painel.</p>
               </div>
             </div>
             <div class="panel-step">Painel 4 • Imagens</div>
           </div>
           <div class="panel-body">
-            <div class="cards two">
-              <div class="card no-click image-slot media" data-viewer='{"type":"image","title":"Trello 1","src":"https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/trello1.jpg"}'>
-                <div class="slot-label">Imagem 01</div>
+            <div class="cards trello-images">
+              <div class="card image-card media" data-viewer='{"type":"image","title":"Trello 1","src":"https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/trello1.jpg","fallbackSrc":"ASSET:trello_board_1"}'>
+                <img data-src="https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/trello1.jpg" data-fallback="ASSET:trello_board_1" alt="Imagem Trello 1">
               </div>
-              <div class="card no-click image-slot media" data-viewer='{"type":"image","title":"Trello 2","src":"https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/trello2.jpg"}'>
-                <div class="slot-label">Imagem 02</div>
+              <div class="card image-card media" data-viewer='{"type":"image","title":"Trello 2","src":"https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/trello2.jpg","fallbackSrc":"ASSET:trello_board_2"}'>
+                <img data-src="https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/trello2.jpg" data-fallback="ASSET:trello_board_2" alt="Imagem Trello 2">
               </div>
             </div>
           </div>
@@ -1230,6 +1253,19 @@ Abrir Trello
       return src;
     }
 
+    function hydrateAssetImages(){
+      document.querySelectorAll('img[data-src]').forEach(img => {
+        const fallback = img.dataset.fallback;
+        if (fallback){
+          img.onerror = () => {
+            img.onerror = null;
+            img.src = resolveSrc(fallback);
+          };
+        }
+        img.src = resolveSrc(img.dataset.src);
+      });
+    }
+
     function parseMediaFromPanel(step){
       const panel = panelEls.find(p => Number(p.dataset.step) === step);
       if (!panel) return null;
@@ -1414,7 +1450,7 @@ Abrir Trello
       return /\.pdf(?:$|\?)/i.test(src || '');
     }
 
-    function createViewerNode(src, title){
+    function createViewerNode(src, title, fallbackSrc = ''){
       const resolved = resolveSrc(src);
       if (isPdfSrc(resolved)){
         const iframe = document.createElement('iframe');
@@ -1425,6 +1461,12 @@ Abrir Trello
       }
       const img = document.createElement('img');
       img.alt = title || 'Imagem';
+      if (fallbackSrc){
+        img.onerror = () => {
+          img.onerror = null;
+          img.src = resolveSrc(fallbackSrc);
+        };
+      }
       img.src = resolved;
       return img;
     }
@@ -1441,7 +1483,7 @@ Abrir Trello
         viewerCaption.textContent = `Galeria com ${media.items.length} itens. Use ‹ › para navegar.`;
         viewerState.src = media.items[0];
       } else if (media.type === 'image'){
-        const node = createViewerNode(media.src, media.title);
+        const node = createViewerNode(media.src, media.title, media.fallbackSrc);
         viewerBody.appendChild(node);
         viewerCaption.textContent = isPdfSrc(resolveSrc(media.src)) ? 'PDF em tela cheia.' : 'Visualização em tela cheia.';
         viewerState.items = [media.src];
@@ -1581,6 +1623,7 @@ Abrir Trello
         p.style.top = `${PANELS.find(x => x.id === Number(p.dataset.step)).y}px`;
       });
       drawConnections();
+      hydrateAssetImages();
       bindInteractions();
       updateMiniMap();
       focusPanel(1);
