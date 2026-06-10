@@ -646,9 +646,26 @@
     #panel-3 .cards.field-order .card.no-click:hover{
       transform:none;
     }
+    #panel-3 .cards.field-order{
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      grid-auto-rows:minmax(122px, auto);
+      align-items:stretch;
+      height:100%;
+    }
+    #panel-3 .cards.field-order .card{
+      min-height:122px;
+    }
+    #panel-3 .cards.field-order .card.no-click{
+      cursor:default;
+    }
+    #panel-3 .cards.field-order .card.no-click:hover{
+      transform:none;
+    }
     #panel-4 .panel-body{
       padding:18px 22px 24px;
+      padding:18px 22px 24px;
     }
+    #panel-4 .cards.trello-images{
     #panel-4 .cards.trello-images{
       grid-template-columns:repeat(2,minmax(0,1fr));
       align-items:stretch;
@@ -657,11 +674,23 @@
     #panel-4 .image-card{
       min-height:100%;
       padding:12px;
+    #panel-4 .image-card{
+      min-height:100%;
+      padding:12px;
       display:flex;
       border:1px solid rgba(0,242,254,.22);
       background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
       box-shadow:0 18px 45px rgba(0,0,0,.24);
+      border:1px solid rgba(0,242,254,.22);
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      box-shadow:0 18px 45px rgba(0,0,0,.24);
     }
+    #panel-4 .image-card img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      border-radius:16px;
+      background:#fff;
     #panel-4 .image-card img{
       width:100%;
       height:100%;
@@ -704,8 +733,13 @@
       display:flex;
       align-items:center;
       justify-content:center;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       position:relative;
       overflow:hidden;
+      padding:30px;
+      background:var(--bg);
       padding:30px;
       background:var(--bg);
     }
@@ -713,7 +747,9 @@
       width:100%;
       height:100%;
       object-fit:contain;
+      object-fit:contain;
       display:block;
+      border-radius:18px;
       border-radius:18px;
     }
     html[data-theme="light"] .timeline-item{
@@ -969,6 +1005,7 @@
           </div>
           <div class="panel-body">
             <div class="cards field-order">
+            <div class="cards field-order">
               <div class="card media" data-viewer='{"type":"gallery","title":"Levantamento dos equipamentos e peças campo","items":["https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/folhacamposervico1.pdf","https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/cadernocampoembranco.jpeg"]}'>
                 <div class="tag blue">Levantamento</div>
                 <h3>Levantamento dos equipamentos e peças campo</h3>
@@ -983,6 +1020,7 @@
               </div>
 
               <div class="card no-click">
+              <div class="card no-click">
                 <div class="tag green">Rotina</div>
                 <h3>Reuniões semanais</h3>
                 <p>Quintas-Feiras - 9:00Hrs.</p>
@@ -993,8 +1031,15 @@
                     Abrir Trello
                   </a>
                 </p>
+                <p style="margin-top:8px;">
+                  <a href="https://trello.com/b/9K4CNUML/acompanhamento-manutencao-geral-2026" target="_blank" rel="noopener"
+                    style="display:inline-block;padding:6px 12px;border-radius:6px;text-decoration:none;font-size:12px;font-weight:600;border:1px solid currentColor;">
+                    Abrir Trello
+                  </a>
+                </p>
               </div>
 
+              <div class="card no-click">
               <div class="card no-click">
                 <div class="tag yellow">Críticos</div>
                 <h3>Avaliações de equipamentos críticos</h3>
@@ -1006,11 +1051,17 @@
                 <h3>Verificação de serviços in loco</h3>
                 <p>Realizado preenchimento do formulario de serviços e peças.</p>
                 <p>Repassado ao PCM para lançamento em planilhas <strong>EXCEL</strong>.</p>
+              <div class="card media" data-viewer='{"type":"gallery","title":"Verificação de serviços in loco","items":["https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/cadernocampo1.jpeg","https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/cadernocampo2.jpeg","https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/cadernocampo3.jpeg","https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/cadernocampo4.jpeg"]}'>
+                <div class="tag blue">In loco</div>
+                <h3>Verificação de serviços in loco</h3>
+                <p>Realizado preenchimento do formulario de serviços e peças.</p>
+                <p>Repassado ao PCM para lançamento em planilhas <strong>EXCEL</strong>.</p>
               </div>
             </div>
           </div>
         </section>
 
+        <!-- PANEL 4 -->
         <!-- PANEL 4 -->
         <section class="panel" data-step="4" id="panel-4">
           <div class="panel-head">
@@ -1018,6 +1069,7 @@
               <div class="badge">04</div>
               <div class="head-copy">
                 <h2>Trello</h2>
+                <p>Quadros de acompanhamento exibidos diretamente no painel.</p>
                 <p>Quadros de acompanhamento exibidos diretamente no painel.</p>
               </div>
             </div>
@@ -1252,6 +1304,19 @@
       if (!src) return '';
       if (src.startsWith('ASSET:')) return ASSETS[src.slice(6)] || '';
       return src;
+    }
+
+    function hydrateAssetImages(){
+      document.querySelectorAll('img[data-src]').forEach(img => {
+        const fallback = img.dataset.fallback;
+        if (fallback){
+          img.onerror = () => {
+            img.onerror = null;
+            img.src = resolveSrc(fallback);
+          };
+        }
+        img.src = resolveSrc(img.dataset.src);
+      });
     }
 
     function hydrateAssetImages(){
@@ -1624,6 +1689,7 @@
         p.style.top = `${PANELS.find(x => x.id === Number(p.dataset.step)).y}px`;
       });
       drawConnections();
+      hydrateAssetImages();
       hydrateAssetImages();
       bindInteractions();
       updateMiniMap();
