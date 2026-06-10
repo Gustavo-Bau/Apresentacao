@@ -615,28 +615,38 @@
       line-height:1.48;
       padding:18px 20px;
     }
-    #panel-4 .panel-body{
-      padding:22px 22px 24px;
-    }
-    #panel-4 .cards.two{
+    #panel-3 .cards.field-order{
       grid-template-columns:repeat(2,minmax(0,1fr));
+      grid-auto-rows:minmax(122px, auto);
       align-items:stretch;
       height:100%;
     }
-    #panel-4 .card.no-click.image-slot{
-      min-height:560px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border:1px dashed rgba(0,242,254,.22);
-      background:linear-gradient(180deg, rgba(255,255,255,.03), rgba(255,255,255,.02));
+    #panel-3 .cards.field-order .card{
+      min-height:122px;
+      cursor:default;
     }
-    #panel-4 .card.no-click.image-slot .slot-label{
-      font-size:24px;
-      font-weight:700;
-      letter-spacing:.08em;
-      text-transform:uppercase;
-      color:var(--muted);
+    #panel-3 .cards.field-order .card:hover{
+      transform:none;
+    }
+    #panel-4 .panel-body{
+      padding:18px 22px 24px;
+    }
+    #panel-4 .trello-feature{
+      height:100%;
+      margin:0;
+      border:1px solid rgba(0,242,254,.22);
+      border-radius:24px;
+      background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      box-shadow:0 18px 45px rgba(0,0,0,.24);
+      overflow:hidden;
+      padding:14px;
+    }
+    #panel-4 .trello-feature img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      border-radius:18px;
+      background:#fff;
     }
     #panel-5 .overlay-grid{
       grid-template-columns:1fr;
@@ -670,15 +680,20 @@
       height:calc(100% - 76px);
     }
     #panel-7 .panel-image-body{
-      display:block;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       position:relative;
       overflow:hidden;
+      padding:30px;
+      background:var(--bg);
     }
     #panel-7 .panel-full-image{
       width:100%;
       height:100%;
-      object-fit:cover;
+      object-fit:contain;
       display:block;
+      border-radius:18px;
     }
     html[data-theme="light"] .timeline-item{
       border-color:var(--border);
@@ -936,78 +951,65 @@
             <div class="panel-step">Painel 3 • Campo</div>
           </div>
           <div class="panel-body">
-            <div class="cards three">
-              <div class="card media" data-viewer='{"type":"gallery","title":"Levantamento dos equipamentos e peças campo","items":["https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/folhacamposervico1.pdf","https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/cadernocampoembranco.jpeg"]}'>
+            <div class="cards field-order">
+              <div class="card no-click">
                 <div class="tag blue">Levantamento</div>
                 <h3>Levantamento dos equipamentos e peças campo</h3>
                 <p>Levantamento baseado no historico de descrição e peças da MG2024.</p>
                 <p>Repassado para a vistoria in loco separado por setores.</p>
               </div>
 
-              <div class="card media" data-viewer='{"type":"gallery","title":"Verificação de serviços in loco","items":["https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/cadernocampo1.jpeg","https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/cadernocampo2.jpeg","https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/cadernocampo3.jpeg","https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/cadernocampo4.jpeg"]}'>
-                <div class="tag blue">In loco</div>
-                <h3>Verificação de serviços in loco</h3>
-                <p>Realizado preenchimento do formulario de serviços e peças.</p>
-                <p>Repassado ao PCM para lançamento em planilhas <strong>EXCEL</strong>.</p>
-                <p class="small">Abrir planilha serviços</p>
-              </div>
-
-              <div class="card media" data-viewer='{"type":"image","title":"Troca de equipamentos","src":"https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/trellotrocaequipamentos.jpg"}'>
-                <div class="tag orange">Ampliação</div>
+              <div class="card no-click">
+                <div class="tag blue">Ampliação</div>
                 <h3>Definição de equipamentos que serão trocados na planta</h3>
                 <p>Ampliação dos gargalos para <strong>2000 Ton/Dia</strong>.</p>
               </div>
 
-              <div class="card">
+              <div class="card no-click">
                 <div class="tag green">Rotina</div>
                 <h3>Reuniões semanais</h3>
                 <p>Quintas-Feiras - 9:00Hrs.</p>
                 <p>Em conjunto com supervisor operacional, produção, administrativo e equipe de gestores da manutenção.</p>
-                <p class="small">Abrir Trello</p>
-<p style="margin-top:8px;">
-<a href="https://trello.com/b/9K4CNUML/acompanhamento-manutencao-geral-2026" target="_blank" rel="noopener"
-style="display:inline-block;padding:6px 12px;border-radius:6px;text-decoration:none;font-size:12px;font-weight:600;border:1px solid currentColor;">
-Abrir Trello
-</a>
-</p>
+                <p style="margin-top:8px;">
+                  <a href="https://trello.com/b/9K4CNUML/acompanhamento-manutencao-geral-2026" target="_blank" rel="noopener"
+                    style="display:inline-block;padding:6px 12px;border-radius:6px;text-decoration:none;font-size:12px;font-weight:600;border:1px solid currentColor;">
+                    Abrir Trello
+                  </a>
+                </p>
               </div>
 
-              <div class="card">
+              <div class="card no-click">
                 <div class="tag yellow">Críticos</div>
                 <h3>Avaliações de equipamentos críticos</h3>
                 <p>Consolidar inspeções, apontamentos e fotos de suporte das áreas mais sensíveis da manutenção.</p>
               </div>
 
-              <div class="card">
-                <div class="tag blue">Processos</div>
-                <h3>Evolução dos processos</h3>
-                <p class="small">Abrir planilha de andamento</p>
+              <div class="card no-click">
+                <div class="tag blue">In loco</div>
+                <h3>Verificação de serviços in loco</h3>
+                <p>Realizado preenchimento do formulario de serviços e peças.</p>
+                <p>Repassado ao PCM para lançamento em planilhas <strong>EXCEL</strong>.</p>
               </div>
             </div>
           </div>
         </section>
 
-<!-- PANEL 4 -->
+        <!-- PANEL 4 -->
         <section class="panel" data-step="4" id="panel-4">
           <div class="panel-head">
             <div class="panel-kicker">
               <div class="badge">04</div>
               <div class="head-copy">
                 <h2>Trello</h2>
-                <p>Quadros de acompanhamento.</p>
+                <p>Quadro de acompanhamento exibido diretamente no painel.</p>
               </div>
             </div>
-            <div class="panel-step">Painel 4 • Imagens</div>
+            <div class="panel-step">Painel 4 • Imagem</div>
           </div>
           <div class="panel-body">
-            <div class="cards two">
-              <div class="card no-click image-slot media" data-viewer='{"type":"image","title":"Trello 1","src":"https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/trello1.jpg"}'>
-                <div class="slot-label">Imagem 01</div>
-              </div>
-              <div class="card no-click image-slot media" data-viewer='{"type":"image","title":"Trello 2","src":"https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/trello2.jpg"}'>
-                <div class="slot-label">Imagem 02</div>
-              </div>
-            </div>
+            <figure class="trello-feature">
+              <img data-src="ASSET:trello_board_1" alt="Quadro Trello de acompanhamento">
+            </figure>
           </div>
         </section>
 
@@ -1228,6 +1230,12 @@ Abrir Trello
       if (!src) return '';
       if (src.startsWith('ASSET:')) return ASSETS[src.slice(6)] || '';
       return src;
+    }
+
+    function hydrateAssetImages(){
+      document.querySelectorAll('img[data-src]').forEach(img => {
+        img.src = resolveSrc(img.dataset.src);
+      });
     }
 
     function parseMediaFromPanel(step){
@@ -1581,6 +1589,7 @@ Abrir Trello
         p.style.top = `${PANELS.find(x => x.id === Number(p.dataset.step)).y}px`;
       });
       drawConnections();
+      hydrateAssetImages();
       bindInteractions();
       updateMiniMap();
       focusPanel(1);
