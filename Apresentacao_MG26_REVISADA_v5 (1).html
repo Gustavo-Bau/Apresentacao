@@ -623,29 +623,34 @@
     }
     #panel-3 .cards.field-order .card{
       min-height:122px;
+    }
+    #panel-3 .cards.field-order .card.no-click{
       cursor:default;
     }
-    #panel-3 .cards.field-order .card:hover{
+    #panel-3 .cards.field-order .card.no-click:hover{
       transform:none;
     }
     #panel-4 .panel-body{
       padding:18px 22px 24px;
     }
-    #panel-4 .trello-feature{
+    #panel-4 .cards.trello-images{
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      align-items:stretch;
       height:100%;
-      margin:0;
+    }
+    #panel-4 .image-card{
+      min-height:100%;
+      padding:12px;
+      display:flex;
       border:1px solid rgba(0,242,254,.22);
-      border-radius:24px;
       background:linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
       box-shadow:0 18px 45px rgba(0,0,0,.24);
-      overflow:hidden;
-      padding:14px;
     }
-    #panel-4 .trello-feature img{
+    #panel-4 .image-card img{
       width:100%;
       height:100%;
       object-fit:contain;
-      border-radius:18px;
+      border-radius:16px;
       background:#fff;
     }
     #panel-5 .overlay-grid{
@@ -952,7 +957,7 @@
           </div>
           <div class="panel-body">
             <div class="cards field-order">
-              <div class="card no-click">
+              <div class="card media" data-viewer='{"type":"gallery","title":"Levantamento dos equipamentos e peças campo","items":["https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/folhacamposervico1.pdf","https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/cadernocampoembranco.jpeg"]}'>
                 <div class="tag blue">Levantamento</div>
                 <h3>Levantamento dos equipamentos e peças campo</h3>
                 <p>Levantamento baseado no historico de descrição e peças da MG2024.</p>
@@ -984,7 +989,7 @@
                 <p>Consolidar inspeções, apontamentos e fotos de suporte das áreas mais sensíveis da manutenção.</p>
               </div>
 
-              <div class="card no-click">
+              <div class="card media" data-viewer='{"type":"gallery","title":"Verificação de serviços in loco","items":["https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/cadernocampo1.jpeg","https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/cadernocampo2.jpeg","https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/cadernocampo3.jpeg","https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/cadernocampo4.jpeg"]}'>
                 <div class="tag blue">In loco</div>
                 <h3>Verificação de serviços in loco</h3>
                 <p>Realizado preenchimento do formulario de serviços e peças.</p>
@@ -1001,15 +1006,20 @@
               <div class="badge">04</div>
               <div class="head-copy">
                 <h2>Trello</h2>
-                <p>Quadro de acompanhamento exibido diretamente no painel.</p>
+                <p>Quadros de acompanhamento exibidos diretamente no painel.</p>
               </div>
             </div>
-            <div class="panel-step">Painel 4 • Imagem</div>
+            <div class="panel-step">Painel 4 • Imagens</div>
           </div>
           <div class="panel-body">
-            <figure class="trello-feature">
-              <img data-src="ASSET:trello_board_1" alt="Quadro Trello de acompanhamento">
-            </figure>
+            <div class="cards trello-images">
+              <div class="card image-card media" data-viewer='{"type":"image","title":"Trello 1","src":"https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/trello1.jpg"}'>
+                <img data-src="https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/trello1.jpg" data-fallback="ASSET:trello_board_1" alt="Imagem Trello 1">
+              </div>
+              <div class="card image-card media" data-viewer='{"type":"image","title":"Trello 2","src":"https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/trello2.jpg"}'>
+                <img data-src="https://pub-393ee290cfc44751b6ba65ad1d69600a.r2.dev/trello2.jpg" data-fallback="ASSET:trello_board_2" alt="Imagem Trello 2">
+              </div>
+            </div>
           </div>
         </section>
 
@@ -1234,6 +1244,13 @@
 
     function hydrateAssetImages(){
       document.querySelectorAll('img[data-src]').forEach(img => {
+        const fallback = img.dataset.fallback;
+        if (fallback){
+          img.onerror = () => {
+            img.onerror = null;
+            img.src = resolveSrc(fallback);
+          };
+        }
         img.src = resolveSrc(img.dataset.src);
       });
     }
